@@ -1,0 +1,6 @@
+@ARCWay.API_HostAddress = http://localhost:5276
+
+GET {{ARCWay.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

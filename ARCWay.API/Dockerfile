@@ -12,16 +12,16 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["ARCWay.API/ARCWay.API.fsproj", "ARCWay.API/"]
-RUN dotnet restore "./ARCWay.API/ARCWay.API.fsproj"
+COPY ["ARCWay.API/ARCWay.API.csproj", "ARCWay.API/"]
+RUN dotnet restore "./ARCWay.API/ARCWay.API.csproj"
 COPY . .
 WORKDIR "/src/ARCWay.API"
-RUN dotnet build "./ARCWay.API.fsproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./ARCWay.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./ARCWay.API.fsproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./ARCWay.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
