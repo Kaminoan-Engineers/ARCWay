@@ -4,6 +4,9 @@ using ARCWay.API.Repositories.Repositories;
 using ARCWay.API.Services.Interfaces;
 using ARCWay.API.Services.Services;
 using MongoDB.Driver;
+using System.Net;
+
+System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +28,8 @@ builder.Services.AddSingleton<IMongoClient, MongoClient>(sp =>
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddHttpClient<IRobloxService, RobloxService>();
 
 
 var app = builder.Build();

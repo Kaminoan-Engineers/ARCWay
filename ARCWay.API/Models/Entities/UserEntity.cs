@@ -12,6 +12,6 @@ public class UserEntity
     [BsonElement("name")]
     public string Name { get; set; } = string.Empty;
 
-    [BsonElement("email")]
-    public string? Email { get; set; }
+    [BsonElement("rid")]
+    public int RId { get; set; }
 }

@@ -10,6 +10,10 @@ public class UsersController : ControllerBase
     private readonly IUserService _service;
     public UsersController(IUserService service) => _service = service;
 
+    [HttpGet("all")]
+    public async Task<IActionResult> GetAllUsers() =>
+        Ok(await _service.GetAllUsersAsync());
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetUser(string id) =>
         Ok(await _service.GetUserByIdAsync(id));
